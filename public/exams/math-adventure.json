@@ -1,0 +1,184 @@
+{
+  "id": "math-adventure",
+  "version": "1.0",
+  "metadata": {
+    "title": "Aventura Matemática",
+    "description": "Suma y resta con tus amigos del bosque.",
+    "subject": "Matemáticas",
+    "category": "aritmética",
+    "icon": "calculate",
+    "coverImage": "https://images.unsplash.com/photo-1518133680487-4179e7df786b?q=80&w=600&auto=format&fit=crop",
+    "difficulty": "easy",
+    "estimatedTime": 10,
+    "tags": ["suma", "resta", "números", "contar"],
+    "ageRange": [5, 8]
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": true,
+    "showFeedback": "immediate",
+    "allowSkip": true,
+    "allowRetry": false,
+    "maxAttempts": 0,
+    "passingScore": 60,
+    "showCorrectAnswer": true
+  },
+  "rewards": {
+    "xpReward": 500,
+    "starThresholds": [60, 80, 100],
+    "bonusXP": {
+      "perfectScore": 200,
+      "noSkips": 100,
+      "speedBonus": 150
+    }
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple-choice",
+      "prompt": {
+        "text": "¿Cuántos plátanos hay en la imagen?",
+        "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=400&auto=format&fit=crop"
+      },
+      "difficulty": "easy",
+      "points": 10,
+      "hint": "Cuenta cada plátano uno por uno",
+      "explanation": "Hay exactamente 4 plátanos en la imagen.",
+      "feedback": {
+        "correct": "¡Excelente! ¡Son 4 plátanos! 🍌🍌🍌🍌",
+        "incorrect": "¡Casi! Cuenta de nuevo con cuidado. 🔍"
+      },
+      "options": [
+        { "id": "a", "text": "2", "color": "tertiary" },
+        { "id": "b", "text": "3", "color": "primary" },
+        { "id": "c", "text": "4", "color": "secondary" },
+        { "id": "d", "text": "5", "color": "outline" }
+      ],
+      "correctAnswer": "c"
+    },
+    {
+      "id": "q2",
+      "type": "true-false",
+      "prompt": { "text": "¿2 + 3 = 5?" },
+      "difficulty": "easy",
+      "points": 10,
+      "statement": "Dos más tres es igual a cinco",
+      "feedback": {
+        "correct": "¡Correcto! 2 + 3 = 5 ✅",
+        "incorrect": "Piénsalo de nuevo... ¿cuánto es 2 + 3?"
+      },
+      "correctAnswer": true
+    },
+    {
+      "id": "q3",
+      "type": "ordering",
+      "prompt": { "text": "Ordena los números de menor a mayor" },
+      "difficulty": "easy",
+      "points": 15,
+      "feedback": {
+        "correct": "¡Perfecto orden! 📊",
+        "incorrect": "Recuerda: el más pequeño va primero"
+      },
+      "items": [
+        { "id": "n1", "text": "5" },
+        { "id": "n2", "text": "1" },
+        { "id": "n3", "text": "3" },
+        { "id": "n4", "text": "8" },
+        { "id": "n5", "text": "2" }
+      ],
+      "correctOrder": ["n2", "n5", "n3", "n1", "n4"]
+    },
+    {
+      "id": "q4",
+      "type": "fill-blanks",
+      "prompt": { "text": "Completa las operaciones" },
+      "difficulty": "medium",
+      "points": 20,
+      "feedback": {
+        "correct": "¡Eres un genio matemático! 🧮",
+        "incorrect": "Intenta calcular paso a paso"
+      },
+      "template": "3 + {{1}} = 7 y 10 - {{2}} = 4",
+      "blanks": [
+        { "id": "1", "correctAnswers": ["4", "cuatro"] },
+        { "id": "2", "correctAnswers": ["6", "seis"] }
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "classify",
+      "prompt": { "text": "Clasifica los números en pares e impares" },
+      "difficulty": "medium",
+      "points": 20,
+      "feedback": {
+        "correct": "¡Clasificación perfecta! 🎯",
+        "incorrect": "Recuerda: los pares se dividen entre 2 exactamente"
+      },
+      "categories": [
+        { "id": "even", "name": "Pares", "color": "#5865f2", "icon": "looks_two" },
+        { "id": "odd", "name": "Impares", "color": "#bc572c", "icon": "looks_one" }
+      ],
+      "items": [
+        { "id": "i1", "text": "2" },
+        { "id": "i2", "text": "7" },
+        { "id": "i3", "text": "4" },
+        { "id": "i4", "text": "9" },
+        { "id": "i5", "text": "6" },
+        { "id": "i6", "text": "3" }
+      ],
+      "correctClassification": {
+        "even": ["i1", "i3", "i5"],
+        "odd": ["i2", "i4", "i6"]
+      }
+    },
+    {
+      "id": "q6",
+      "type": "sequence",
+      "prompt": { "text": "¿Qué número sigue en la secuencia?" },
+      "difficulty": "medium",
+      "points": 15,
+      "feedback": {
+        "correct": "¡Encontraste el patrón! 🔢",
+        "incorrect": "Fíjate en cuánto aumenta cada número"
+      },
+      "visibleItems": [
+        { "id": "s1", "value": "2" },
+        { "id": "s2", "value": "4" },
+        { "id": "s3", "value": "6" },
+        { "id": "s4", "value": "8" }
+      ],
+      "options": [
+        { "id": "o1", "value": "9" },
+        { "id": "o2", "value": "10" },
+        { "id": "o3", "value": "12" },
+        { "id": "o4", "value": "11" }
+      ],
+      "correctNext": "o2",
+      "missingPosition": 4
+    },
+    {
+      "id": "q7",
+      "type": "matching",
+      "prompt": { "text": "Relaciona cada operación con su resultado" },
+      "difficulty": "medium",
+      "points": 20,
+      "feedback": {
+        "correct": "¡Todas las parejas correctas! 🎉",
+        "incorrect": "Intenta calcular cada operación"
+      },
+      "leftItems": [
+        { "id": "l1", "text": "2 + 3" },
+        { "id": "l2", "text": "4 + 4" },
+        { "id": "l3", "text": "10 - 3" },
+        { "id": "l4", "text": "6 + 3" }
+      ],
+      "rightItems": [
+        { "id": "r1", "text": "5" },
+        { "id": "r2", "text": "8" },
+        { "id": "r3", "text": "7" },
+        { "id": "r4", "text": "9" }
+      ],
+      "correctPairs": [["l1","r1"], ["l2","r2"], ["l3","r3"], ["l4","r4"]]
+    }
+  ]
+}

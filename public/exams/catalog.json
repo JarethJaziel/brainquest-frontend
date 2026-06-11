@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "exams": [
+    {
+      "id": "math-adventure",
+      "file": "math-adventure.json",
+      "metadata": {
+        "title": "Aventura Matemática",
+        "description": "Suma y resta con tus amigos del bosque.",
+        "subject": "Matemáticas",
+        "category": "aritmética",
+        "icon": "calculate",
+        "difficulty": "easy",
+        "estimatedTime": 10,
+        "tags": ["suma", "resta", "números"],
+        "ageRange": [5, 8],
+        "questionCount": 7
+      },
+      "rewards": { "xpReward": 500 },
+      "unlockCondition": null,
+      "themeColor": "primary"
+    }
+  ]
+}
