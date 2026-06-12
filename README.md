@@ -1,4 +1,4 @@
-# BrainQuest — Plataforma de Exámenes Interactivos
+# BrainQuest — Plataforma de Exámenes Interactivos - Jareth Moo
 
 Plataforma educativa autohospedada e interactiva diseñada para niños. La aplicación interpreta archivos JSON dinámicamente para generar exámenes con dinámicas de gamificación (estrellas, XP, rachas, logros y avatares). Está construida en el frontend utilizando **React + TypeScript + Tailwind CSS v4 + Vite**.
 
@@ -45,7 +45,9 @@ Un archivo de examen válido debe ser un objeto JSON con los siguientes campos r
 ```
 
 ### 1. `metadata` (Objeto)
+
 Contiene la información de presentación del examen.
+
 - `title` (string): Título de la aventura.
 - `description` (string): Breve descripción motivadora.
 - `subject` (string): Materia del examen (ej: "Matemáticas", "Ciencias", "Lectura").
@@ -57,7 +59,9 @@ Contiene la información de presentación del examen.
 - `ageRange` (array de 2 números): Rango de edad recomendado `[edadMin, edadMax]` (ej: `[6, 9]`).
 
 ### 2. `settings` (Objeto)
+
 Define los ajustes de control y comportamiento del examen.
+
 - `shuffleQuestions` (boolean): Mezclar el orden de las preguntas al jugar.
 - `shuffleOptions` (boolean): Mezclar las opciones dentro de preguntas de opción múltiple.
 - `showFeedback` (string): `"immediate"` (evalúa e indica respuesta correcta al instante) | `"end"` (evalúa al finalizar el examen) | `"none"`.
@@ -69,7 +73,9 @@ Define los ajustes de control y comportamiento del examen.
 - `timeLimit` (number, opcional): Límite de tiempo total en segundos para completar el examen.
 
 ### 4. `rewards` (Objeto)
+
 Define la experiencia que ganará el niño.
+
 - `xpReward` (number): Experiencia base otorgada por completar el examen.
 - `starThresholds` (array de 3 números): Porcentajes de acierto mínimos ordenados de menor a mayor para conseguir 1, 2 y 3 estrellas (ej: `[60, 80, 95]`).
 
@@ -81,22 +87,22 @@ Cada elemento del arreglo `questions` es un objeto que comparte la siguiente bas
 
 ```typescript
 interface QuestionBase {
-  id: string;                         // Identificador único
-  type: QuestionType;                 // Uno de los 14 tipos
+  id: string; // Identificador único
+  type: QuestionType; // Uno de los 14 tipos
   prompt: {
-    text: string;                     // Pregunta o enunciado principal
-    image?: string;                   // URL de imagen complementaria (opcional)
-    audio?: string;                   // URL de audio complementario (opcional)
-    video?: string;                   // URL de video complementario (opcional)
+    text: string; // Pregunta o enunciado principal
+    image?: string; // URL de imagen complementaria (opcional)
+    audio?: string; // URL de audio complementario (opcional)
+    video?: string; // URL de video complementario (opcional)
   };
   difficulty: "easy" | "medium" | "hard" | "expert";
-  points: number;                     // Puntos otorgados al contestarla bien
-  hint?: string;                      // Pista opcional
-  explanation?: string;               // Explicación opcional mostrada post-respuesta
+  points: number; // Puntos otorgados al contestarla bien
+  hint?: string; // Pista opcional
+  explanation?: string; // Explicación opcional mostrada post-respuesta
   feedback: {
-    correct: string;                  // Mensaje de éxito alegre en español
-    incorrect: string;                // Mensaje de error motivador en español
-    partial?: string;                 // Mensaje para aciertos parciales (opcional)
+    correct: string; // Mensaje de éxito alegre en español
+    incorrect: string; // Mensaje de error motivador en español
+    partial?: string; // Mensaje para aciertos parciales (opcional)
   };
 }
 ```
@@ -106,7 +112,9 @@ A continuación se detalla cómo escribir las propiedades específicas para cada
 ---
 
 ### 1. Opción Múltiple (`multiple-choice`)
+
 Una única respuesta correcta seleccionable entre varios botones chunky.
+
 - `options` (array): Mínimo 2 opciones. Cada una con `id` (string), `text` (string), `image` (URL, opcional) y `color` (estilo visual del botón: `"primary"` | `"secondary"` | `"tertiary"` | `"outline"` | `"accent"`).
 - `correctAnswer` (string): El `id` de la opción correcta.
 
@@ -117,7 +125,10 @@ Una única respuesta correcta seleccionable entre varios botones chunky.
   "prompt": { "text": "¿Cuál es la capital de España?" },
   "difficulty": "easy",
   "points": 10,
-  "feedback": { "correct": "¡Correcto! Madrid es precioso.", "incorrect": "No, recuerda que está en el centro del país." },
+  "feedback": {
+    "correct": "¡Correcto! Madrid es precioso.",
+    "incorrect": "No, recuerda que está en el centro del país."
+  },
   "options": [
     { "id": "a", "text": "Barcelona", "color": "outline" },
     { "id": "b", "text": "Madrid", "color": "primary" },
@@ -130,7 +141,9 @@ Una única respuesta correcta seleccionable entre varios botones chunky.
 ---
 
 ### 2. Selección Múltiple (`multiple-select`)
+
 Varias respuestas correctas seleccionables mediante casilleros (checkboxes).
+
 - `options` (array): Mínimo 2 opciones estructuradas como en `multiple-choice`.
 - `correctAnswers` (array de strings): Lista de los `id` de todas las opciones correctas.
 - `minSelections` (number, opcional): Número mínimo de casilleros que debe marcar el niño.
@@ -143,7 +156,10 @@ Varias respuestas correctas seleccionables mediante casilleros (checkboxes).
   "prompt": { "text": "¿Cuáles de estos animales son insectos?" },
   "difficulty": "medium",
   "points": 15,
-  "feedback": { "correct": "¡Perfecto! Encontraste los bichitos.", "incorrect": "Revisa los que tienen 6 patas." },
+  "feedback": {
+    "correct": "¡Perfecto! Encontraste los bichitos.",
+    "incorrect": "Revisa los que tienen 6 patas."
+  },
   "options": [
     { "id": "a", "text": "Hormiga", "color": "primary" },
     { "id": "b", "text": "Perro", "color": "outline" },
@@ -159,7 +175,9 @@ Varias respuestas correctas seleccionables mediante casilleros (checkboxes).
 ---
 
 ### 3. Verdadero o Falso (`true-false`)
+
 Evaluación directa de un enunciado con dos botones interactivos.
+
 - `statement` (string): La afirmación a evaluar.
 - `correctAnswer` (boolean): `true` o `false`.
 
@@ -170,7 +188,10 @@ Evaluación directa de un enunciado con dos botones interactivos.
   "prompt": { "text": "Responde con Verdadero o Falso:" },
   "difficulty": "easy",
   "points": 10,
-  "feedback": { "correct": "¡Bien! Los pingüinos no pueden volar.", "incorrect": "Recuerda que sus alas actúan como aletas para nadar." },
+  "feedback": {
+    "correct": "¡Bien! Los pingüinos no pueden volar.",
+    "incorrect": "Recuerda que sus alas actúan como aletas para nadar."
+  },
   "statement": "Los pingüinos son aves que vuelan muy alto.",
   "correctAnswer": false
 }
@@ -179,7 +200,9 @@ Evaluación directa de un enunciado con dos botones interactivos.
 ---
 
 ### 4. Respuesta Corta (`short-answer`)
+
 El niño escribe su respuesta en un casillero de texto.
+
 - `correctAnswers` (array de strings): Lista de términos válidos que se consideran correctos (para admitir sinónimos o variaciones).
 - `caseSensitive` (boolean): Si se deben diferenciar las mayúsculas de minúsculas.
 - `maxLength` (number): Longitud máxima de caracteres en el input.
@@ -192,7 +215,10 @@ El niño escribe su respuesta en un casillero de texto.
   "prompt": { "text": "¿Cómo se llama nuestro planeta?" },
   "difficulty": "easy",
   "points": 10,
-  "feedback": { "correct": "¡Estupendo! Vivimos en la Tierra.", "incorrect": "Pista: empieza con T." },
+  "feedback": {
+    "correct": "¡Estupendo! Vivimos en la Tierra.",
+    "incorrect": "Pista: empieza con T."
+  },
   "correctAnswers": ["Tierra", "planeta tierra", "la tierra"],
   "caseSensitive": false,
   "maxLength": 20
@@ -202,7 +228,9 @@ El niño escribe su respuesta en un casillero de texto.
 ---
 
 ### 5. Completar Espacios (`fill-blanks`)
+
 Oraciones donde faltan palabras y se completan en campos vacíos integrados.
+
 - `template` (string): La oración usando marcadores de formato `{{1}}`, `{{2}}`, etc.
 - `blanks` (array): Lista que define cada espacio. Cada uno debe tener `id` (string, debe coincidir con el marcador `{{id}}`) y `correctAnswers` (array de strings con respuestas válidas).
 
@@ -213,7 +241,10 @@ Oraciones donde faltan palabras y se completan en campos vacíos integrados.
   "prompt": { "text": "Completa los espacios de la oración:" },
   "difficulty": "medium",
   "points": 15,
-  "feedback": { "correct": "¡Qué buena ortografía!", "incorrect": "Revisa los colores del semáforo." },
+  "feedback": {
+    "correct": "¡Qué buena ortografía!",
+    "incorrect": "Revisa los colores del semáforo."
+  },
   "template": "El color {{1}} significa detenerse y el {{2}} significa avanzar.",
   "blanks": [
     { "id": "1", "correctAnswers": ["rojo", "el rojo"] },
@@ -225,7 +256,9 @@ Oraciones donde faltan palabras y se completan en campos vacíos integrados.
 ---
 
 ### 6. Relacionar Elementos (`matching`)
+
 Asociar elementos de la columna izquierda con la derecha dibujando líneas.
+
 - `leftItems` (array): Elementos de la columna izquierda con `id` y `text`/`image`.
 - `rightItems` (array): Elementos de la columna derecha con `id` y `text`/`image`.
 - `correctPairs` (array de tuplas `[string, string]`): Parejas válidas formadas por `[idIzquierda, idDerecha]`.
@@ -255,7 +288,9 @@ Asociar elementos de la columna izquierda con la derecha dibujando líneas.
 ---
 
 ### 7. Ordenar Elementos (`ordering`)
+
 Ordenar una lista desordenada arrastrando las fichas hacia arriba o abajo.
+
 - `items` (array): Elementos a ordenar con `id` (string), `text` (string) e `image` (opcional).
 - `correctOrder` (array de strings): Los `id` ordenados en la secuencia correcta de principio a fin.
 
@@ -263,7 +298,9 @@ Ordenar una lista desordenada arrastrando las fichas hacia arriba o abajo.
 {
   "id": "q7",
   "type": "ordering",
-  "prompt": { "text": "Ordena el ciclo de vida de la mariposa desde el inicio:" },
+  "prompt": {
+    "text": "Ordena el ciclo de vida de la mariposa desde el inicio:"
+  },
   "difficulty": "hard",
   "points": 20,
   "items": [
@@ -279,7 +316,9 @@ Ordenar una lista desordenada arrastrando las fichas hacia arriba o abajo.
 ---
 
 ### 8. Clasificar Elementos (`classify`)
+
 Arrastrar y soltar elementos desordenados dentro de baldes o categorías grandes.
+
 - `categories` (array): Los grupos destino con `id`, `name`, `color` (clases Tailwind opcionales) e `icon`.
 - `items` (array): Las tarjetas flotantes con `id`, `text` e `image` (opcional).
 - `correctClassification` (Record de arreglos): Mapeo clave-valor donde la clave es el `categoryId` y el valor es la lista de `itemIds` que le corresponden.
@@ -311,7 +350,9 @@ Arrastrar y soltar elementos desordenados dentro de baldes o categorías grandes
 ---
 
 ### 9. Secuencias Lógicas (`sequence`)
+
 Completar un patrón lógico seleccionando la ficha faltante en el casillero vacante.
+
 - `visibleItems` (array): Elementos de la secuencia ordenados. El casillero que falta debe tener `value: "?"` (u otro indicador visible) y estar en el índice especificado.
 - `missingPosition` (number): Índice base-0 del casillero vacío que falta en la secuencia.
 - `options` (array): Fichas candidatas disponibles para rellenar la secuencia.
@@ -342,7 +383,9 @@ Completar un patrón lógico seleccionando la ficha faltante en el casillero vac
 ---
 
 ### 10. Selección sobre Imágenes (`hotspot`)
+
 Tocar una o más zonas específicas de una imagen como respuesta.
+
 - `backgroundImage` (string): URL de la imagen principal.
 - `hotspots` (array): Zonas interactivas. Cada una contiene `id` (string), `x` (number, 0-100% desde la izquierda), `y` (number, 0-100% desde arriba), `radius` (number, radio clickeable en %) y un `label` descriptivo.
 - `correctHotspots` (array de strings): Los `id` de los hotspots que deben ser seleccionados.
@@ -357,8 +400,20 @@ Tocar una o más zonas específicas de una imagen como respuesta.
   "points": 20,
   "backgroundImage": "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=500",
   "hotspots": [
-    { "id": "ojo_izq", "x": 42, "y": 35, "radius": 7, "label": "Ojo izquierdo" },
-    { "id": "oreja_der", "x": 68, "y": 18, "radius": 8, "label": "Oreja derecha" },
+    {
+      "id": "ojo_izq",
+      "x": 42,
+      "y": 35,
+      "radius": 7,
+      "label": "Ojo izquierdo"
+    },
+    {
+      "id": "oreja_der",
+      "x": 68,
+      "y": 18,
+      "radius": 8,
+      "label": "Oreja derecha"
+    },
     { "id": "hocico", "x": 50, "y": 48, "radius": 6, "label": "Hocico" }
   ],
   "correctHotspots": ["ojo_izq"],
@@ -369,7 +424,9 @@ Tocar una o más zonas específicas de una imagen como respuesta.
 ---
 
 ### 11. Preguntas con Audio (`audio-question`)
+
 Preguntas que requieren escuchar una pista sonora antes de responder la pregunta interna.
+
 - `audioUrl` (string): URL de la pista de sonido (.mp3, .wav).
 - `autoPlay` (boolean): Iniciar la reproducción automáticamente.
 - `maxPlays` (number, opcional): Número límite de reproducciones permitidas.
@@ -404,7 +461,9 @@ Preguntas que requieren escuchar una pista sonora antes de responder la pregunta
 ---
 
 ### 12. Preguntas con Video (`video-question`)
+
 El niño ve un video y contesta una pregunta. Puede pausar automáticamente en un segundo clave.
+
 - `videoUrl` (string): URL del video (.mp4, .ogg).
 - `autoPlay` (boolean): Reproducir de inmediato.
 - `pauseAt` (number, opcional): El segundo exacto donde el reproductor se pausará de forma obligatoria para forzar la respuesta.
@@ -436,7 +495,9 @@ El niño ve un video y contesta una pregunta. Puede pausar automáticamente en u
 ---
 
 ### 13. Preguntas con Imágenes (`image-question`)
+
 Preguntas que muestran una ilustración destacada con soporte de zoom táctil/pantalla completa.
+
 - `imageUrl` (string): URL de la imagen principal.
 - `zoomable` (boolean): Habilitar botón de lupa 🔍 para inspeccionar en pantalla completa.
 - `innerQuestion` (objeto): La pregunta interior, estructurada como en `audio-question`.
@@ -467,7 +528,9 @@ Preguntas que muestran una ilustración destacada con soporte de zoom táctil/pa
 ---
 
 ### 14. Preguntas Mixtas (`mixed`)
+
 Evaluaciones compuestas con múltiples subsecciones verticales de diferente índole.
+
 - `sections` (array): Sub-secciones ordenadas. Cada sección contiene `type` (`"text"` | `"image"` | `"select"` | `"input"` | `"drag-drop"`) y `content` (el texto explicativo o URL).
   - Si es tipo `"select"`, requiere `options` (array de opciones) y `correctAnswer` (string).
   - Si es tipo `"input"`, requiere `correctAnswer` (string o array de strings).
@@ -480,7 +543,10 @@ Evaluaciones compuestas con múltiples subsecciones verticales de diferente índ
   "prompt": { "text": "Resuelve la sección mixta de biología:" },
   "difficulty": "hard",
   "points": 30,
-  "feedback": { "correct": "¡Increíble nivel!", "incorrect": "Revisa bien las preguntas antes de avanzar." },
+  "feedback": {
+    "correct": "¡Increíble nivel!",
+    "incorrect": "Revisa bien las preguntas antes de avanzar."
+  },
   "sections": [
     {
       "type": "text",
