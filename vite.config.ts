@@ -8,5 +8,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/brainquest-frontend/',
 })
 

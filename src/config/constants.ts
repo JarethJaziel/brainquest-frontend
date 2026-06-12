@@ -6,15 +6,19 @@ export const STORAGE_KEYS = {
   SETTINGS: 'brainquest_settings',
 } as const;
 
+// src/config/constants.ts
+const base = import.meta.env.BASE_URL;
+
 export const SOUNDS = {
-  CLICK: '/sounds/click.mp3',
-  CORRECT: '/sounds/correct.mp3',
-  INCORRECT: '/sounds/incorrect.mp3',
-  COMPLETE: '/sounds/complete.mp3',
-  STAR: '/sounds/star.mp3',
-  LEVEL_UP: '/sounds/levelup.mp3',
-  ACHIEVEMENT: '/sounds/achievement.mp3',
+  CLICK: `${base}sounds/click.mp3`,
+  CORRECT: `${base}sounds/correct.mp3`,
+  INCORRECT: `${base}sounds/incorrect.mp3`,
+  COMPLETE: `${base}sounds/complete.mp3`,
+  STAR: `${base}sounds/star.mp3`,
+  LEVEL_UP: `${base}sounds/levelup.mp3`,
+  ACHIEVEMENT: `${base}sounds/achievement.mp3`,
 } as const;
+
 
 export const THEME_COLORS = {
   primary: 'primary',

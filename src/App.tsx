@@ -18,7 +18,7 @@ function App() {
   return (
     <AudioProvider>
       <UserProgressProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route element={<AppLayout />}>
               <Route path={ROUTES.HOME} element={<HomePage />} />
