@@ -35,6 +35,12 @@ import { MatchingRenderer } from './MatchingRenderer';
 import { OrderingRenderer } from './OrderingRenderer';
 import { ClassifyRenderer } from './ClassifyRenderer';
 import { SequenceRenderer } from './SequenceRenderer';
+import { MultipleSelectRenderer } from './MultipleSelectRenderer';
+import { HotspotRenderer } from './HotspotRenderer';
+import { AudioQuestionRenderer } from './AudioQuestionRenderer';
+import { VideoQuestionRenderer } from './VideoQuestionRenderer';
+import { ImageQuestionRenderer } from './ImageQuestionRenderer';
+import { MixedRenderer } from './MixedRenderer';
 
 // Register renderers
 registerRenderer('multiple-choice', MultipleChoiceRenderer);
@@ -45,3 +51,9 @@ registerRenderer('matching', MatchingRenderer);
 registerRenderer('ordering', OrderingRenderer);
 registerRenderer('classify', ClassifyRenderer);
 registerRenderer('sequence', SequenceRenderer);
+registerRenderer('multiple-select', MultipleSelectRenderer);
+registerRenderer('hotspot', HotspotRenderer);
+registerRenderer('audio-question', AudioQuestionRenderer);
+registerRenderer('video-question', VideoQuestionRenderer);
+registerRenderer('image-question', ImageQuestionRenderer);
+registerRenderer('mixed', MixedRenderer);

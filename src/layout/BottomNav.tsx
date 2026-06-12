@@ -5,6 +5,7 @@ import MaterialIcon from '../components/ui/MaterialIcon';
 export const BottomNav: React.FC = () => {
   const navItems = [
     { label: 'Inicio', path: '/', icon: 'home' },
+    { label: 'Importar', path: '/import', icon: 'file_upload' },
     { label: 'Misiones', path: '/quests', icon: 'emoji_events' },
     { label: 'Perfil', path: '/profile', icon: 'person' },
   ];

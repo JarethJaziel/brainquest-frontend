@@ -19,6 +19,25 @@
       "rewards": { "xpReward": 500 },
       "unlockCondition": null,
       "themeColor": "primary"
+    },
+    {
+      "id": "all-question-types",
+      "file": "all-question-types.json",
+      "metadata": {
+        "title": "Super Desafío BrainQuest",
+        "description": "Una gran aventura probando los 14 tipos de preguntas del reino del conocimiento.",
+        "subject": "Ciencias",
+        "category": "trivia general",
+        "icon": "auto_stories",
+        "difficulty": "medium",
+        "estimatedTime": 15,
+        "tags": ["trivia", "general", "desafío", "divertido"],
+        "ageRange": [6, 12],
+        "questionCount": 14
+      },
+      "rewards": { "xpReward": 800 },
+      "unlockCondition": null,
+      "themeColor": "secondary"
     }
   ]
 }

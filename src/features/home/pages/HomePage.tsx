@@ -9,6 +9,7 @@ import ChunkyButton from '../../../components/ui/ChunkyButton';
 import StarRating from '../../../components/ui/StarRating';
 import Avatar from '../../../components/ui/Avatar';
 import LevelIndicator from '../../../components/ui/LevelIndicator';
+import { ImportedExamRepository } from '../../../data/repositories/ImportedExamRepository';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,16 +32,35 @@ const HomePage: React.FC = () => {
     loadCatalog();
   }, []);
 
+  const handleDeleteImported = (e: React.MouseEvent, examId: string) => {
+    e.stopPropagation();
+    const confirmDelete = window.confirm(
+      '¿Estás seguro de que quieres eliminar este examen importado? Se borrará permanentemente de tu catálogo local.'
+    );
+    if (confirmDelete) {
+      const importedRepo = new ImportedExamRepository();
+      importedRepo.remove(examId);
+      repositories.exam.getCatalog().then(items => {
+        setCatalog(items);
+        setSelectedSubject('all');
+      });
+    }
+  };
+
+  const hasImportedExams = catalog.some(exam => exam.id.startsWith('imported-'));
   const subjects = [
     { id: 'all', name: 'Todos', icon: 'apps', color: 'text-primary' },
     { id: 'Matemáticas', name: 'Matemáticas', icon: 'calculate', color: 'text-primary-container' },
     { id: 'Ciencias', name: 'Ciencias', icon: 'pets', color: 'text-tertiary' },
     { id: 'Lectura', name: 'Lectura', icon: 'auto_stories', color: 'text-secondary' },
+    ...(hasImportedExams ? [{ id: 'imported', name: 'Importados', icon: 'file_upload', color: 'text-tertiary' }] : []),
   ];
 
   const filteredCatalog = selectedSubject === 'all'
     ? catalog
-    : catalog.filter(item => item.metadata.subject.toLowerCase() === selectedSubject.toLowerCase());
+    : selectedSubject === 'imported'
+      ? catalog.filter(item => item.id.startsWith('imported-'))
+      : catalog.filter(item => item.metadata.subject.toLowerCase() === selectedSubject.toLowerCase());
 
   if (progressLoading || loadingCatalog) {
     return (
@@ -178,13 +198,32 @@ const HomePage: React.FC = () => {
                     </div>
                   )}
 
+                  {/* Delete button for imported exams */}
+                  {exam.id.startsWith('imported-') && (
+                    <button
+                      onClick={(e) => handleDeleteImported(e, exam.id)}
+                      className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-red-50 hover:bg-red-100 text-error flex items-center justify-center border border-red-200 shadow-sm transition-all cursor-pointer active:scale-95"
+                      title="Eliminar aventura importada"
+                    >
+                      <MaterialIcon name="close" className="text-sm font-black" />
+                    </button>
+                  )}
+
                   {/* Top row: Subject Badge + XP badge */}
                   <div className="flex items-center justify-between">
-                    <span className="bg-surface-container text-primary font-black px-3 py-1 rounded-full text-xs flex items-center gap-1">
-                      <MaterialIcon name={exam.metadata.icon} className="text-sm" />
-                      {exam.metadata.subject}
-                    </span>
-                    <span className="bg-secondary-container text-on-secondary-container font-black px-3 py-1 rounded-full text-xs flex items-center gap-1 shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="bg-surface-container text-primary font-black px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                        <MaterialIcon name={exam.metadata.icon} className="text-sm" />
+                        {exam.metadata.subject}
+                      </span>
+                      {exam.id.startsWith('imported-') && (
+                        <span className="bg-tertiary-container text-on-tertiary-container font-black px-2.5 py-0.5 rounded-full text-[10px] flex items-center gap-0.5 shadow-sm">
+                          <MaterialIcon name="file_download" className="text-xs text-tertiary" />
+                          Importado
+                        </span>
+                      )}
+                    </div>
+                    <span className={`${exam.id.startsWith('imported-') ? 'mr-8' : ''} bg-secondary-container text-on-secondary-container font-black px-3 py-1 rounded-full text-xs flex items-center gap-1 shadow-sm`}>
                       <MaterialIcon name="insights" className="text-sm text-secondary animate-pulse" />
                       +{exam.rewards.xpReward} XP
                     </span>

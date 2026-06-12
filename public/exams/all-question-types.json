@@ -1,0 +1,397 @@
+{
+  "id": "all-question-types",
+  "version": "1.0",
+  "metadata": {
+    "title": "Super Desafío BrainQuest",
+    "description": "Una gran aventura probando los 14 tipos de preguntas del reino del conocimiento.",
+    "subject": "Ciencias",
+    "category": "trivia general",
+    "icon": "auto_stories",
+    "difficulty": "medium",
+    "estimatedTime": 15,
+    "tags": ["trivia", "general", "desafío", "divertido"],
+    "ageRange": [6, 12]
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "showFeedback": "immediate",
+    "allowSkip": true,
+    "allowRetry": true,
+    "maxAttempts": 0,
+    "passingScore": 60,
+    "showCorrectAnswer": true
+  },
+  "rewards": {
+    "xpReward": 800,
+    "starThresholds": [60, 80, 95]
+  },
+  "questions": [
+    {
+      "id": "q-mc",
+      "type": "multiple-choice",
+      "prompt": {
+        "text": "¿Qué gas respiramos principalmente del aire para vivir?"
+      },
+      "difficulty": "easy",
+      "points": 10,
+      "hint": "Las plantas lo producen durante el día.",
+      "explanation": "El oxígeno representa aproximadamente el 21% del aire de nuestra atmósfera y es vital para la respiración animal.",
+      "feedback": {
+        "correct": "¡Excelente! El oxígeno nos da vida. 🌬️",
+        "incorrect": "Inténtalo de nuevo. Pista: empieza con O."
+      },
+      "options": [
+        { "id": "a", "text": "Dióxido de carbono", "color": "outline" },
+        { "id": "b", "text": "Oxígeno", "color": "primary" },
+        { "id": "c", "text": "Nitrógeno", "color": "secondary" },
+        { "id": "d", "text": "Helio", "color": "tertiary" }
+      ],
+      "correctAnswer": "b"
+    },
+    {
+      "id": "q-tf",
+      "type": "true-false",
+      "prompt": {
+        "text": "¿Es el Sol una estrella?"
+      },
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "El Sol es una estrella de tipo espectral G2V que se encuentra en el centro de nuestro sistema solar.",
+      "feedback": {
+        "correct": "¡Muy bien! El Sol es la estrella más cercana a la Tierra. ☀️",
+        "incorrect": "Recuerda que el Sol brilla con luz propia igual que las estrellas nocturnas."
+      },
+      "statement": "El Sol es en realidad una estrella gigante de gas brillante.",
+      "correctAnswer": true
+    },
+    {
+      "id": "q-sa",
+      "type": "short-answer",
+      "prompt": {
+        "text": "¿Cómo se llama el satélite natural de la Tierra?"
+      },
+      "difficulty": "easy",
+      "points": 10,
+      "hint": "Brilla por la noche y cambia de fase.",
+      "explanation": "La Luna es el único satélite natural de la Tierra y gira a su alrededor cada 27.3 días.",
+      "feedback": {
+        "correct": "¡Espectacular! La Luna alumbra nuestras noches. 🌕",
+        "incorrect": "Pista: empieza con L y tiene 4 letras."
+      },
+      "correctAnswers": ["Luna", "la luna", "luna"],
+      "caseSensitive": false,
+      "maxLength": 20,
+      "placeholder": "Escribe aquí..."
+    },
+    {
+      "id": "q-fb",
+      "type": "fill-blanks",
+      "prompt": {
+        "text": "Completa la oración sobre el ciclo del agua."
+      },
+      "difficulty": "medium",
+      "points": 20,
+      "explanation": "El calor del sol evapora el agua líquida convirtiéndola en gas, el cual luego se enfría formando nubes.",
+      "feedback": {
+        "correct": "¡Increíble! Entiendes muy bien el ciclo del agua. 💧",
+        "incorrect": "Revisa los conceptos de evaporación y condensación."
+      },
+      "template": "El agua sube al cielo por la {{1}} y forma las {{2}}.",
+      "blanks": [
+        { "id": "1", "correctAnswers": ["evaporacion", "evaporación"] },
+        { "id": "2", "correctAnswers": ["nubes", "las nubes"] }
+      ]
+    },
+    {
+      "id": "q-ma",
+      "type": "matching",
+      "prompt": {
+        "text": "Relaciona cada animal con su forma de moverse."
+      },
+      "difficulty": "easy",
+      "points": 20,
+      "explanation": "Los animales se adaptan a su entorno desarrollando patas para correr, alas para volar y aletas para nadar.",
+      "feedback": {
+        "correct": "¡Parejas perfectas! Conoces muy bien a los animales. 🦁",
+        "incorrect": "Piensa en dónde vive cada uno de estos animales."
+      },
+      "leftItems": [
+        { "id": "l1", "text": "Pájaro" },
+        { "id": "l2", "text": "Pez" },
+        { "id": "l3", "text": "Gato" }
+      ],
+      "rightItems": [
+        { "id": "r1", "text": "Camina/Corre" },
+        { "id": "r2", "text": "Vuela" },
+        { "id": "r3", "text": "Nada" }
+      ],
+      "correctPairs": [
+        ["l1", "r2"],
+        ["l2", "r3"],
+        ["l3", "r1"]
+      ]
+    },
+    {
+      "id": "q-or",
+      "type": "ordering",
+      "prompt": {
+        "text": "Ordena los planetas empezando desde el más cercano al Sol."
+      },
+      "difficulty": "medium",
+      "points": 20,
+      "explanation": "El orden de los primeros planetas interiores desde el Sol es Mercurio, Venus, Tierra y Marte.",
+      "feedback": {
+        "correct": "¡Astrónomo experto! Orden espacial correcto. 🪐",
+        "incorrect": "Mercurio es el más caliente y cercano. La Tierra está en tercer lugar."
+      },
+      "items": [
+        { "id": "i3", "text": "Tierra" },
+        { "id": "i1", "text": "Mercurio" },
+        { "id": "i2", "text": "Venus" },
+        { "id": "i4", "text": "Marte" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"]
+    },
+    {
+      "id": "q-cl",
+      "type": "classify",
+      "prompt": {
+        "text": "Clasifica los siguientes alimentos según su grupo."
+      },
+      "difficulty": "medium",
+      "points": 25,
+      "explanation": "La manzana y la banana son frutas llenas de vitaminas, mientras que la lechuga y la zanahoria son verduras.",
+      "feedback": {
+        "correct": "¡Nutriólogo estrella! Clasificación saludable. 🍎",
+        "incorrect": "Revisa si las verduras y frutas están bien organizadas."
+      },
+      "categories": [
+        { "id": "c1", "name": "Frutas", "color": "bg-red-100 border-red-300 text-red-700", "icon": "restaurant" },
+        { "id": "c2", "name": "Verduras", "color": "bg-green-100 border-green-300 text-green-700", "icon": "grass" }
+      ],
+      "items": [
+        { "id": "item1", "text": "Manzana" },
+        { "id": "item2", "text": "Lechuga" },
+        { "id": "item3", "text": "Plátano" },
+        { "id": "item4", "text": "Zanahoria" }
+      ],
+      "correctClassification": {
+        "c1": ["item1", "item3"],
+        "c2": ["item2", "item4"]
+      }
+    },
+    {
+      "id": "q-se",
+      "type": "sequence",
+      "prompt": {
+        "text": "¿Qué número falta para completar la secuencia?"
+      },
+      "difficulty": "easy",
+      "points": 15,
+      "explanation": "La secuencia consiste en sumar 5 al número anterior: 5, 10, 15, 20...",
+      "feedback": {
+        "correct": "¡Genio de los números! Secuencia completada. 🔢",
+        "incorrect": "Cuenta de 5 en 5 y lo descubrirás."
+      },
+      "visibleItems": [
+        { "id": "s1", "value": "5" },
+        { "id": "s2", "value": "10" },
+        { "id": "s3", "value": "15" },
+        { "id": "s4", "value": "?" }
+      ],
+      "options": [
+        { "id": "o1", "value": "18" },
+        { "id": "o2", "value": "20" },
+        { "id": "o3", "value": "25" }
+      ],
+      "correctNext": "o2",
+      "missingPosition": 3
+    },
+    {
+      "id": "q-ms",
+      "type": "multiple-select",
+      "prompt": {
+        "text": "¿Cuáles de estos animales son mamíferos?"
+      },
+      "difficulty": "medium",
+      "points": 20,
+      "hint": "Los mamíferos toman leche al nacer.",
+      "explanation": "El perro y la ballena son mamíferos, mientras que el águila es un ave y el tiburón es un pez.",
+      "feedback": {
+        "correct": "¡Perfecto! Encontraste todos los mamíferos. 🐬",
+        "incorrect": "Pista: hay una criatura del océano que sí es mamífero."
+      },
+      "options": [
+        { "id": "a", "text": "Perro", "color": "primary" },
+        { "id": "b", "text": "Águila", "color": "outline" },
+        { "id": "c", "text": "Ballena", "color": "secondary" },
+        { "id": "d", "text": "Tiburón", "color": "outline" }
+      ],
+      "correctAnswers": ["a", "c"],
+      "minSelections": 2,
+      "maxSelections": 2
+    },
+    {
+      "id": "q-hs",
+      "type": "hotspot",
+      "prompt": {
+        "text": "Toca las dos orejas del gatito en la imagen."
+      },
+      "difficulty": "easy",
+      "points": 20,
+      "explanation": "Las orejas de los felinos son puntiagudas y les permiten escuchar sonidos muy agudos.",
+      "feedback": {
+        "correct": "¡Qué buen ojo! Encontraste las orejas del gatito. 🐱",
+        "incorrect": "Están en la parte de arriba de su cabecita."
+      },
+      "backgroundImage": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80",
+      "hotspots": [
+        { "id": "h1", "x": 30, "y": 20, "radius": 8, "label": "Oreja izquierda" },
+        { "id": "h2", "x": 70, "y": 20, "radius": 8, "label": "Oreja derecha" },
+        { "id": "h3", "x": 50, "y": 50, "radius": 7, "label": "Nariz" },
+        { "id": "h4", "x": 50, "y": 80, "radius": 10, "label": "Boca" }
+      ],
+      "correctHotspots": ["h1", "h2"],
+      "multiSelect": true
+    },
+    {
+      "id": "q-audio",
+      "type": "audio-question",
+      "prompt": {
+        "text": "Escucha atentamente el audio y responde."
+      },
+      "difficulty": "medium",
+      "points": 25,
+      "explanation": "El canto es característico de las aves silvestres para comunicarse.",
+      "feedback": {
+        "correct": "¡Qué buen oído musical! 🎶",
+        "incorrect": "Escucha el canto con más atención."
+      },
+      "audioUrl": "https://www.soundjay.com/nature/sounds/birds-singing-01.mp3",
+      "autoPlay": false,
+      "maxPlays": 3,
+      "innerQuestion": {
+        "id": "q-audio-inner",
+        "type": "multiple-choice",
+        "prompt": {
+          "text": "¿Qué tipo de animal emite este sonido?"
+        },
+        "difficulty": "easy",
+        "points": 25,
+        "feedback": {
+          "correct": "¡Correcto!",
+          "incorrect": "Incorrecto"
+        },
+        "options": [
+          { "id": "a", "text": "Un león rugiendo", "color": "outline" },
+          { "id": "b", "text": "Un pájaro cantando", "color": "primary" },
+          { "id": "c", "text": "Un delfín silbando", "color": "secondary" }
+        ],
+        "correctAnswer": "b"
+      }
+    },
+    {
+      "id": "q-video",
+      "type": "video-question",
+      "prompt": {
+        "text": "Mira el video divertido del conejito y responde."
+      },
+      "difficulty": "medium",
+      "points": 30,
+      "explanation": "El video muestra un conejito animado (Big Buck Bunny) moviéndose libremente.",
+      "feedback": {
+        "correct": "¡Muy bien observado! 🐰",
+        "incorrect": "Revisa los primeros segundos del video."
+      },
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "autoPlay": false,
+      "pauseAt": 4,
+      "innerQuestion": {
+        "id": "q-video-inner",
+        "type": "true-false",
+        "prompt": {
+          "text": "¿Aparece un conejo en los primeros segundos del video?"
+        },
+        "difficulty": "easy",
+        "points": 30,
+        "feedback": {
+          "correct": "¡Correcto!",
+          "incorrect": "Incorrecto"
+        },
+        "statement": "El video comienza mostrando a un gran conejo blanco.",
+        "correctAnswer": true
+      }
+    },
+    {
+      "id": "q-image",
+      "type": "image-question",
+      "prompt": {
+        "text": "Examina la imagen con cuidado y responde la pregunta."
+      },
+      "difficulty": "easy",
+      "points": 20,
+      "explanation": "La imagen contiene una demostración de transparencia PNG con un dado.",
+      "feedback": {
+        "correct": "¡Impresionante nivel de detalle! 🎲",
+        "incorrect": "Usa la lupa para ver mejor."
+      },
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png",
+      "zoomable": true,
+      "innerQuestion": {
+        "id": "q-image-inner",
+        "type": "short-answer",
+        "prompt": {
+          "text": "¿Qué objeto de juego con puntos aparece en la imagen?"
+        },
+        "difficulty": "easy",
+        "points": 20,
+        "feedback": {
+          "correct": "¡Correcto!",
+          "incorrect": "Incorrecto"
+        },
+        "correctAnswers": ["dado", "dados", "un dado"],
+        "caseSensitive": false,
+        "maxLength": 20
+      }
+    },
+    {
+      "id": "q-mixed",
+      "type": "mixed",
+      "prompt": {
+        "text": "Lee la lección y responde las secciones."
+      },
+      "difficulty": "hard",
+      "points": 40,
+      "explanation": "El ecosistema contiene plantas (productores) y animales (consumidores).",
+      "feedback": {
+        "correct": "¡Superado el reto final! Eres un científico. 🔬",
+        "incorrect": "Revisa bien cada sección antes de confirmar."
+      },
+      "sections": [
+        {
+          "type": "text",
+          "content": "Los productores (como las plantas) crean su alimento con el sol. Los consumidores (como el conejo y el zorro) deben alimentarse de otros seres vivos."
+        },
+        {
+          "type": "image",
+          "content": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/800px-Red_Apple.jpg"
+        },
+        {
+          "type": "select",
+          "content": "¿Quiénes producen su propio alimento?",
+          "options": [
+            { "id": "a", "text": "Los animales" },
+            { "id": "b", "text": "Las plantas" }
+          ],
+          "correctAnswer": "b"
+        },
+        {
+          "type": "input",
+          "content": "Escribe el nombre de la fruta roja mostrada arriba:",
+          "correctAnswer": ["manzana", "la manzana"]
+        }
+      ]
+    }
+  ]
+}
