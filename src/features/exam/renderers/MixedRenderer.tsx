@@ -14,19 +14,19 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
   const answers = (selectedAnswer as Record<number, string>) || {};
 
   const handleSelectOption = (sectionIdx: number, optionId: string) => {
-    if (disabled) return;
+    if (disabled || showFeedback) return;
     const newAnswers = { ...answers, [sectionIdx]: optionId };
     onAnswer(newAnswers);
   };
 
   const handleInputChange = (sectionIdx: number, value: string) => {
-    if (disabled) return;
+    if (disabled || showFeedback) return;
     const newAnswers = { ...answers, [sectionIdx]: value };
     onAnswer(newAnswers);
   };
 
   const handleDragDropSelect = (sectionIdx: number, itemId: string) => {
-    if (disabled) return;
+    if (disabled || showFeedback) return;
     // Click-to-place simulation: clicking a drag item places it as the answer
     const newAnswers = { ...answers, [sectionIdx]: itemId };
     onAnswer(newAnswers);
@@ -65,15 +65,15 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
 
     if (showFeedback) {
       if (isCorrect) {
-        return 'border-emerald-500 bg-emerald-50 text-emerald-700 focus:ring-emerald-500';
+        return 'border-emerald-500 bg-emerald-50 text-emerald-700 focus:ring-2 focus:ring-emerald-500/20';
       }
       if (userAns !== '') {
-        return 'border-error bg-error-container/10 text-error focus:ring-error';
+        return 'border-error bg-error-container/10 text-error focus:ring-2 focus:ring-error/20';
       }
       return 'border-outline-variant bg-transparent opacity-60';
     }
 
-    return 'border-outline focus:border-primary focus:ring-primary';
+    return 'border-outline-variant text-on-surface bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20';
   };
 
   const isDragItemCorrect = (itemId: string, section: MixedSection) => {
@@ -84,7 +84,7 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       {/* Mixed Section Indicators */}
       <div className="flex items-center gap-2 bg-primary/5 px-4 py-3 rounded-2xl border border-solid border-primary/10">
         <MaterialIcon name="list_alt" className="text-xl text-primary shrink-0" />
@@ -135,11 +135,11 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
 
               {/* SECTION: IMAGE */}
               {section.type === 'image' && (
-                <div className="w-full max-w-md mx-auto rounded-2xl overflow-hidden border-2 border-solid border-outline-variant bg-white p-2">
+                <div className="w-full max-w-xl mx-auto rounded-3xl overflow-hidden border-4 border-solid border-outline-variant bg-surface-container-low clay-card shadow-md p-2 min-h-[200px] sm:min-h-[300px] flex items-center justify-center">
                   <img
                     src={section.content}
                     alt="Ilustración de la sección"
-                    className="w-full max-h-56 object-contain rounded-xl"
+                    className="w-full max-h-72 sm:max-h-96 object-contain rounded-2xl block mx-auto"
                   />
                 </div>
               )}
@@ -159,7 +159,7 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
                       <button
                         key={option.id}
                         type="button"
-                        disabled={disabled}
+                        disabled={disabled || showFeedback}
                         onClick={() => handleSelectOption(idx, option.id)}
                         className={`
                           p-3.5 text-left font-bold text-base rounded-xl border-2 border-solid
@@ -190,15 +190,15 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
                     {section.content}
                   </label>
 
-                  <div className="pl-6 flex items-center gap-3">
+                  <div className="pl-6 flex flex-wrap items-center gap-3 w-full">
                     <input
                       type="text"
-                      disabled={disabled}
+                      disabled={disabled || showFeedback}
                       value={answers[idx] || ''}
                       onChange={e => handleInputChange(idx, e.target.value)}
                       placeholder="Escribe aquí tu respuesta..."
                       className={`
-                        w-full max-w-sm px-4 py-3 rounded-xl border-2 border-solid font-bold text-base outline-none transition-all
+                        w-full sm:w-[350px] min-w-[260px] p-4 rounded-2xl border-2 border-solid font-bold text-lg outline-none transition-all
                         ${getInputStyles(idx, section)}
                       `}
                     />
@@ -244,7 +244,7 @@ export const MixedRenderer: React.FC<QuestionRendererProps> = ({
                           <button
                             key={item.id}
                             type="button"
-                            disabled={disabled || isPlaced}
+                            disabled={disabled || showFeedback || isPlaced}
                             onClick={() => handleDragDropSelect(idx, item.id)}
                             className={`
                               px-3 py-2 rounded-xl border border-solid text-sm font-bold transition-all flex items-center gap-1.5 select-none cursor-pointer

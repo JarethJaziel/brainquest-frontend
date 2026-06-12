@@ -59,7 +59,7 @@ export const MultipleChoiceRenderer: React.FC<QuestionRendererProps> = ({
               ${getOptionStyles(option.id, option.color)}
             `}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex justify-center my-6">
               {option.image && (
                 <img
                   src={option.image}

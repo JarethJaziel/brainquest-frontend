@@ -95,7 +95,7 @@ export const VideoQuestionRenderer: React.FC<QuestionRendererProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       {/* Video Player Box */}
       <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border-4 border-solid border-outline-variant bg-black shadow-lg aspect-video select-none group">
         <video
@@ -155,7 +155,12 @@ export const VideoQuestionRenderer: React.FC<QuestionRendererProps> = ({
         </div>
       </div>
 
-      <div className="border-t-2 border-dashed border-outline-variant/60 pt-4 mt-2">
+      <div className="border-t-2 border-dashed border-outline-variant/60 pt-6 mt-4 flex flex-col gap-4 text-left">
+        {q.innerQuestion.prompt && (
+          <h3 className="text-lg font-black text-on-surface">
+            {q.innerQuestion.prompt.text}
+          </h3>
+        )}
         <QuestionRenderer
           question={q.innerQuestion}
           onAnswer={onAnswer}

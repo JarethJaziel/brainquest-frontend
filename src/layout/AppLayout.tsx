@@ -9,7 +9,7 @@ const AppLayout = () => {
   const { levelUpEvent, clearLevelUpEvent, toasts, removeToast } = useUserProgress();
 
   return (
-    <div className="min-h-screen bg-background text-on-background flex flex-col font-base pb-20 md:pb-6">
+    <div className="min-h-screen bg-background text-on-background flex flex-col font-base pb-28">
       {/* Header */}
       <Header />
 

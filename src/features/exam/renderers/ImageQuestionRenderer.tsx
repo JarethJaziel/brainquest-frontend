@@ -68,7 +68,12 @@ export const ImageQuestionRenderer: React.FC<QuestionRendererProps> = ({
       )}
 
       {/* Divider and Inner Question */}
-      <div className="border-t-2 border-dashed border-outline-variant/60 pt-4 mt-2">
+      <div className="border-t-2 border-dashed border-outline-variant/60 pt-6 mt-4 flex flex-col gap-4 text-left">
+        {q.innerQuestion.prompt && (
+          <h3 className="text-lg font-black text-on-surface">
+            {q.innerQuestion.prompt.text}
+          </h3>
+        )}
         <QuestionRenderer
           question={q.innerQuestion}
           onAnswer={onAnswer}

@@ -156,7 +156,7 @@ export const OrderingRenderer: React.FC<QuestionRendererProps> = ({
   const isOrderCorrect = JSON.stringify(orderedIds) === JSON.stringify(q.correctOrder);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       {/* Visual Instruction helper */}
       {!showFeedback && (
         <div className="text-sm font-bold text-primary flex items-center gap-1.5 justify-center select-none">

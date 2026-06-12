@@ -98,7 +98,7 @@ export const AudioQuestionRenderer: React.FC<QuestionRendererProps> = ({
   const isPlayDisabled = disabled || (q.maxPlays ? (playCount >= q.maxPlays && !isPlaying) : false);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       {/* Audio Player Container */}
       <div className="w-full bg-surface-container-low border-2 border-solid border-outline-variant p-4 rounded-3xl clay-card select-none flex flex-col gap-4">
         <audio
@@ -165,7 +165,12 @@ export const AudioQuestionRenderer: React.FC<QuestionRendererProps> = ({
         </div>
       </div>
 
-      <div className="border-t-2 border-dashed border-outline-variant/60 pt-4 mt-2">
+      <div className="border-t-2 border-dashed border-outline-variant/60 pt-6 mt-4 flex flex-col gap-4 text-left">
+        {q.innerQuestion.prompt && (
+          <h3 className="text-lg font-black text-on-surface">
+            {q.innerQuestion.prompt.text}
+          </h3>
+        )}
         <QuestionRenderer
           question={q.innerQuestion}
           onAnswer={onAnswer}
