@@ -8,5 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  // ✅ ESTA ES LA LÍNEA QUE TE FALTA:
+  base: '/brainquest-frontend/',
 })
 
