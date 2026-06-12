@@ -122,6 +122,23 @@ export class ExamEngine {
     return null;
   }
 
+  goToQuestion(index: number): Question | null {
+    if (index >= 0 && index < this.questions.length) {
+      this.currentIndex = index;
+      this.questionStartTime = Date.now();
+      return this.getCurrentQuestion();
+    }
+    return null;
+  }
+
+  getAnswerForQuestion(questionId: string): AnswerRecord | null {
+    return this.answers.get(questionId) || null;
+  }
+
+  getAnswersMap(): Map<string, AnswerRecord> {
+    return new Map(this.answers);
+  }
+
   isComplete(): boolean {
     return this.answers.size === this.questions.length;
   }

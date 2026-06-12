@@ -10,6 +10,9 @@ interface ExamFooterProps {
   showFeedback: boolean;
   isCorrect?: boolean;
   isLastQuestion: boolean;
+  isFirstQuestion: boolean;
+  onPrevious: () => void;
+  allowNavigateBack: boolean;
   onSkip: () => void;
   onSubmit: () => void;
   onNext: () => void;
@@ -22,6 +25,9 @@ export const ExamFooter: React.FC<ExamFooterProps> = ({
   showFeedback,
   isCorrect = false,
   isLastQuestion,
+  isFirstQuestion,
+  onPrevious,
+  allowNavigateBack,
   onSkip,
   onSubmit,
   onNext,
@@ -57,8 +63,22 @@ export const ExamFooter: React.FC<ExamFooterProps> = ({
 
       {/* Button controls bar */}
       <div className="flex items-center justify-between gap-4 mt-2 select-none">
+        {/* Previous Button (Anterior) */}
+        {allowNavigateBack && !isFirstQuestion ? (
+          <ChunkyButton
+            color="white"
+            onClick={onPrevious}
+            className="px-6"
+          >
+            <MaterialIcon name="arrow_back" />
+            <span>Anterior</span>
+          </ChunkyButton>
+        ) : (
+          <div className="w-[100px] sm:w-[120px] shrink-0" />
+        )}
+
         {/* Skip button (Saltar) */}
-        {allowSkip && !showFeedback && (
+        {allowSkip && !showFeedback ? (
           <ChunkyButton
             color="white"
             onClick={onSkip}
@@ -66,6 +86,8 @@ export const ExamFooter: React.FC<ExamFooterProps> = ({
           >
             Saltar
           </ChunkyButton>
+        ) : (
+          !showFeedback && <div className="flex-1" />
         )}
 
         {/* Action Button: Comprobar -> Siguiente */}

@@ -207,3 +207,19 @@
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* Navigator bubble state transitions */
+@keyframes bubble-pop {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bubble-current {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(61, 74, 216, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(61, 74, 216, 0); }
+}
+
+/* Hide scrollbar for navigator */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

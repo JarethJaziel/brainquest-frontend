@@ -9,6 +9,7 @@ import HomePage from './features/home/pages/HomePage';
 import ExamStartPage from './features/exam/pages/ExamStartPage';
 import ExamPlayPage from './features/exam/pages/ExamPlayPage';
 import ExamResultPage from './features/exam/pages/ExamResultPage';
+import ExamReviewPage from './features/exam/pages/ExamReviewPage';
 import ProfilePage from './features/profile/pages/ProfilePage';
 import QuestsPage from './features/quests/pages/QuestsPage';
 import ImportExamPage from './features/import/pages/ImportExamPage';
@@ -24,6 +25,7 @@ function App() {
               <Route path={ROUTES.EXAM_START} element={<ExamStartPage />} />
               <Route path={ROUTES.EXAM_PLAY} element={<ExamPlayPage />} />
               <Route path={ROUTES.EXAM_RESULT} element={<ExamResultPage />} />
+              <Route path={ROUTES.EXAM_REVIEW} element={<ExamReviewPage />} />
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
               <Route path={ROUTES.QUESTS} element={<QuestsPage />} />
               <Route path={ROUTES.IMPORT} element={<ImportExamPage />} />

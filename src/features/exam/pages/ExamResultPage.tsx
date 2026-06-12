@@ -254,6 +254,13 @@ const ExamResultPage: React.FC = () => {
       {/* Bottom actions Buttons panel */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-4">
         <ChunkyButton
+          onClick={() => navigate(`/exam/${examId}/review`, { state: { result } })}
+          className="w-full sm:w-auto px-8 py-3 bg-tertiary text-on-tertiary font-black border-2 border-solid shadow-[0_4px_0_0_#7f2b01] order-0 sm:order-0"
+        >
+          <MaterialIcon name="quiz" />
+          <span>Revisar Respuestas</span>
+        </ChunkyButton>
+        <ChunkyButton
           onClick={() => navigate('/')}
           className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-black border-2 border-solid shadow-[0_4px_0_0_#222fc2] order-2 sm:order-1"
         >

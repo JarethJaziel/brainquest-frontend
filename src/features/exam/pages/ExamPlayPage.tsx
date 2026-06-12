@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useExam } from '../../../hooks/useExam';
 import { useTimer } from '../../../hooks/useTimer';
 import ExamProgress from '../components/ExamProgress';
+import QuestionNavigator from '../components/QuestionNavigator';
 import QuestionCard from '../components/QuestionCard';
 import ExamFooter from '../components/ExamFooter';
 import ClayCard from '../../../components/ui/ClayCard';
@@ -15,6 +16,8 @@ const ExamPlayPage: React.FC = () => {
 
   const {
     exam,
+    questions,
+    currentIndex,
     currentQuestion,
     selectedAnswer,
     feedback,
@@ -22,10 +25,13 @@ const ExamPlayPage: React.FC = () => {
     loading,
     error,
     progress,
+    answersMap,
     setSelectedAnswer,
     submitAnswer,
     skipQuestion,
     nextQuestion,
+    previousQuestion,
+    goToQuestion,
     finalize,
   } = useExam(examId || '');
 
@@ -95,7 +101,7 @@ const ExamPlayPage: React.FC = () => {
     );
   }
 
-  const isLastQuestion = progress.current === progress.total;
+  const isLastQuestion = currentIndex === (questions.length - 1);
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl mx-auto pb-12">
@@ -103,7 +109,18 @@ const ExamPlayPage: React.FC = () => {
       <ExamProgress 
         current={progress.current} 
         total={progress.total} 
+        currentIndex={currentIndex}
         timeLeft={timeLimit ? timeLeft : undefined} 
+      />
+
+      {/* Bubble navigation bar */}
+      <QuestionNavigator
+        questions={questions}
+        currentIndex={currentIndex}
+        answersMap={answersMap}
+        mode="play"
+        onNavigate={goToQuestion}
+        disabled={!exam.settings.allowSkip}
       />
 
       {/* Main Question Display Card */}
@@ -123,6 +140,9 @@ const ExamPlayPage: React.FC = () => {
         showFeedback={!!feedback}
         isCorrect={feedback?.isCorrect}
         isLastQuestion={isLastQuestion}
+        isFirstQuestion={currentIndex === 0}
+        onPrevious={previousQuestion}
+        allowNavigateBack={exam.settings.allowSkip}
         onSkip={skipQuestion}
         onSubmit={submitAnswer}
         onNext={isLastQuestion ? handleFinalize : nextQuestion}
