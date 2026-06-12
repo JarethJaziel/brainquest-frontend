@@ -1,6 +1,6 @@
 # BrainQuest — Plataforma de Exámenes Interactivos - Jareth Moo
 
-Plataforma educativa autohospedada e interactiva diseñada para niños. La aplicación interpreta archivos JSON dinámicamente para generar exámenes con dinámicas de gamificación (estrellas, XP, rachas, logros y avatares). Está construida en el frontend utilizando **React + TypeScript + Tailwind CSS v4 + Vite**.
+Plataforma educativa autohospedada e interactiva diseñada para niños. La aplicación interpreta archivos JSON dinámicamente para generar exámenes con dinámicas de gamificación (estrellas, XP, rachas, logros y avatares). Está construida en el frontend utilizando **React + TypeScript + Tailwind CSS v4 + Vite**. Backend proximamente...
 
 ---
 
