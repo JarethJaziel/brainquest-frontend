@@ -3,6 +3,7 @@ import {
   DndContext,
   closestCenter,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
@@ -67,6 +68,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
       ref={setNodeRef}
       style={style}
       className={`
+        w-full touch-none
         p-4 font-bold text-base sm:text-lg rounded-2xl border-2 border-solid
         flex items-center gap-3 transition-all duration-150 select-none
         ${disabled || showFeedback ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'}
@@ -128,7 +130,13 @@ export const OrderingRenderer: React.FC<QuestionRendererProps> = ({
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 5, // 5px movement starts drag so clicks don't interfere with scroll
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150, // Espera 150ms antes de iniciar el arrastre en móviles
+        tolerance: 5,
       },
     })
   );
@@ -189,8 +197,8 @@ export const OrderingRenderer: React.FC<QuestionRendererProps> = ({
 
       {/* Correct order guide on fail */}
       {showFeedback && !isOrderCorrect && (
-        <div className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 border-dashed text-left max-w-md mx-auto w-full select-none animate-fade-in">
-          <div className="text-sm font-bold text-amber-800 flex items-center gap-1.5 mb-2">
+        <div className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 border-dashed text-left w-full shrink-0 animate-fade-in">
+          <div className="text-sm font-bold text-amber-800 flex items-center gap-1.5 mb-1">
             <MaterialIcon name="lightbulb" className="text-amber-500" />
             <span>El orden correcto es:</span>
           </div>

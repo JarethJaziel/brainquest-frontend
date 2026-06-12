@@ -132,7 +132,7 @@ const ExamResultPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-2xl mx-auto select-none pb-12">
+    <div className="w-full px-4 sm:px-6 flex flex-col gap-6 max-w-2xl mx-auto select-none pb-12">
       {/* Title Header Card */}
       <ClayCard className={`p-6 text-center border-none text-white relative overflow-hidden ${passed ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : 'bg-gradient-to-br from-orange-400 to-red-500'}`}>
         <div className="absolute -left-8 -top-8 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>

@@ -7,10 +7,10 @@ export const LevelIndicator: React.FC = () => {
   const pct = Math.min(100, Math.round((currentXP / xpToNextLevel) * 100));
 
   return (
-    <div className="flex flex-col gap-2 p-4 bg-surface-container rounded-2xl border-2 border-outline-variant select-none">
-      <div className="flex justify-between items-center">
-        <span className="font-bold text-lg text-primary">Nivel {level}</span>
-        <span className="text-xs text-outline font-semibold font-mono">
+    <div className="w-full min-w-[250px] flex flex-col gap-2 p-4 bg-surface-container rounded-2xl border-2 border-outline-variant select-none">
+      <div className="flex justify-between items-center gap-4">
+        <span className="font-bold text-lg text-primary whitespace-nowrap">Nivel {level}</span>
+        <span className="text-xs text-outline font-semibold font-mono whitespace-nowrap">
           {currentXP} / {xpToNextLevel} XP
         </span>
       </div>
