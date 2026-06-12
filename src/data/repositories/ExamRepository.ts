@@ -5,7 +5,7 @@ import { JsonFetchAdapter } from '../adapters/JsonFetchAdapter';
 import { ImportedExamRepository } from './ImportedExamRepository';
 
 export class LocalExamRepository implements IExamRepository {
-  private readonly basePath = '/exams';
+  private readonly basePath = `${import.meta.env.BASE_URL}exams`;
   private readonly fetchAdapter = new JsonFetchAdapter();
   private readonly importedRepo = new ImportedExamRepository();
 
