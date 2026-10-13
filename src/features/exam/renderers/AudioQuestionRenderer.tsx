@@ -30,7 +30,6 @@ export const AudioQuestionRenderer: React.FC<QuestionRendererProps> = ({
           })
           .catch(() => {
             // Autoplay blocked by browser policy
-            console.log('Autoplay blocked by browser policy. User action required.');
           });
       }
     }
