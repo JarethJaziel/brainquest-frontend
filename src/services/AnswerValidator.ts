@@ -14,6 +14,7 @@ import type {
   AudioQuestion,
   VideoQuestion,
   ImageQuestion,
+  MixedQuestion,
 } from '../models/question-types';
 
 export interface ValidationResult {
@@ -216,23 +217,19 @@ const validators: Record<QuestionType, ValidatorFn> = {
     // sections may contain answers at specific indices
     // Let's implement a clean evaluator
     // If not supported yet in standard renderers, we return points or correct
-    const question = q as any;
+    const question = q as MixedQuestion;
     const answers = (a as Record<number, unknown>) || {};
     let correctSections = 0;
     let totalScoredSections = 0;
 
-    question.sections.forEach((section: any, idx: number) => {
+    question.sections.forEach((section, idx: number) => {
       if (section.correctAnswer) {
         totalScoredSections++;
         const userAns = answers[idx];
         
-        let sectionCorrect = false;
-        if (Array.isArray(section.correctAnswer)) {
-          // Can match any correct answer
-          sectionCorrect = section.correctAnswer.includes(userAns);
-        } else {
-          sectionCorrect = String(userAns).trim().toLowerCase() === String(section.correctAnswer).trim().toLowerCase();
-        }
+        const sectionCorrect = Array.isArray(section.correctAnswer)
+          ? section.correctAnswer.includes(String(userAns))
+          : String(userAns).trim().toLowerCase() === String(section.correctAnswer).trim().toLowerCase();
         
         if (sectionCorrect) {
           correctSections++;
