@@ -149,8 +149,8 @@ export function validateExamJson(json: unknown): ValidationReport {
   // 7. Preview assembly
   let examPreview: ValidationReport['examPreview'] = undefined;
   if (isValid) {
-    const metaObj = root.metadata as any;
-    const questArr = root.questions as any[];
+    const metaObj = root.metadata as { title: string; subject: string; difficulty: string; estimatedTime: number; };
+    const questArr = root.questions as unknown[];
     examPreview = {
       title: metaObj.title,
       subject: metaObj.subject,
@@ -302,8 +302,8 @@ function validateQuestion(
     }
 
     case 'matching': {
-      const left = q.leftItems as unknown[];
-      const right = q.rightItems as unknown[];
+      const left = q.leftItems as Record<string, unknown>[];
+      const right = q.rightItems as Record<string, unknown>[];
       const pairs = q.correctPairs as [string, string][];
 
       if (!Array.isArray(left) || left.length === 0) {
@@ -315,8 +315,8 @@ function validateQuestion(
       if (!Array.isArray(pairs) || pairs.length === 0) {
         addError('Faltan las parejas correctas de relación ("correctPairs").');
       } else {
-        const leftIds = Array.isArray(left) ? left.map(item => String((item as any).id)) : [];
-        const rightIds = Array.isArray(right) ? right.map(item => String((item as any).id)) : [];
+        const leftIds = Array.isArray(left) ? left.map(item => String(item.id)) : [];
+        const rightIds = Array.isArray(right) ? right.map(item => String(item.id)) : [];
         pairs.forEach(([lId, rId], pIdx) => {
           if (!leftIds.includes(lId) || !rightIds.includes(rId)) {
             addError(`La pareja en correctPairs[${pIdx}] (${lId} -> ${rId}) tiene un ID que no existe en las columnas.`);
