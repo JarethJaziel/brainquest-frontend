@@ -261,6 +261,8 @@ export const UserProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
       let finalProfile = updatedProfile;
       const finalUnlocked = [...updatedProgressWithoutAch.achievements];
 
+      let totalAchievementXp = 0;
+
       newAchievements.forEach(achId => {
         finalUnlocked.push({
           achievementId: achId,
@@ -270,17 +272,7 @@ export const UserProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
         // Award achievement reward XP
         const ach = ALL_ACHIEVEMENTS.find(a => a.id === achId);
         if (ach) {
-          const newTotalWithAchXP = finalProfile.totalXP + ach.xpReward;
-          const calculated = calculateUserProfile(newTotalWithAchXP, finalProfile.nickname, finalProfile.avatar);
-          
-          if (calculated.level > finalProfile.level) {
-            leveledUp = true;
-            setLevelUpEvent({
-              oldLevel: finalProfile.level,
-              newLevel: calculated.level,
-            });
-          }
-          finalProfile = calculated;
+          totalAchievementXp += ach.xpReward;
         }
 
         // Trigger visual toast
@@ -289,6 +281,23 @@ export const UserProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
           triggerAchievementToast(achId);
         }, 800);
       });
+
+      if (totalAchievementXp > 0) {
+        const calculated = calculateUserProfile(
+          finalProfile.totalXP + totalAchievementXp,
+          finalProfile.nickname,
+          finalProfile.avatar
+        );
+
+        if (calculated.level > finalProfile.level) {
+          leveledUp = true;
+          setLevelUpEvent({
+            oldLevel: finalProfile.level,
+            newLevel: calculated.level,
+          });
+        }
+        finalProfile = calculated;
+      }
 
       const finalProgress: UserProgress = {
         ...updatedProgressWithoutAch,
