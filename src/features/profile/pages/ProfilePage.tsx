@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { repositories } from '../../../data';
 import { useUserProgress } from '../../../context/UserProgressContext';
 import { ALL_ACHIEVEMENTS } from '../../../data/repositories/AchievementRepository';
@@ -66,10 +66,17 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  const examTitleMap = useMemo(() => {
+    const map = new Map<string, string>();
+    catalog.forEach(e => {
+      map.set(e.id, e.metadata.title);
+    });
+    return map;
+  }, [catalog]);
+
   // Helper to get exam title from id
   const getExamTitle = (examId: string) => {
-    const exam = catalog.find(e => e.id === examId);
-    return exam ? exam.metadata.title : 'Aventura desconocida';
+    return examTitleMap.get(examId) || 'Aventura desconocida';
   };
 
   // Format date strings
