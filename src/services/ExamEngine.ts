@@ -155,22 +155,24 @@ export class ExamEngine {
     const totalTime = Math.round((now - this.startTime) / 1000);
 
     // Build complete answer records, ensuring any unanswered questions are recorded as skipped
-    const answersList: AnswerRecord[] = this.questions.map(q => {
-      const existing = this.answers.get(q.id);
-      if (existing) return existing;
+    const answersList: AnswerRecord[] = this.isComplete()
+      ? Array.from(this.answers.values())
+      : this.questions.map(q => {
+          const existing = this.answers.get(q.id);
+          if (existing) return existing;
 
-      // Unanswered, mark as skipped
-      return {
-        questionId: q.id,
-        answer: null,
-        isCorrect: false,
-        isPartial: false,
-        pointsEarned: 0,
-        timeSpent: 0,
-        skipped: true,
-        attempts: 0,
-      };
-    });
+          // Unanswered, mark as skipped
+          return {
+            questionId: q.id,
+            answer: null,
+            isCorrect: false,
+            isPartial: false,
+            pointsEarned: 0,
+            timeSpent: 0,
+            skipped: true,
+            attempts: 0,
+          };
+        });
 
     const score = ScoringEngine.calculateScore(answersList, this.exam);
     const rewards = ScoringEngine.calculateXP(score, this.exam, totalTime);
